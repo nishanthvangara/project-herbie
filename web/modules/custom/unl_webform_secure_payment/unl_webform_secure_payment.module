@@ -1,0 +1,21 @@
+<?php
+
+use Drupal\Core\Form\FormStateInterface;
+
+function unl_webform_secure_payment_webform_third_party_settings_form_alter(&$form, FormStateInterface $form_state) {
+  
+  $third_party_settings_manager = \Drupal::service('webform.third_party_settings_manager');
+
+  $form['third_party_settings']['unl_webform_secure_payment'] = [
+    '#type' => 'details',
+    '#title' => t('NU ITS Secure Payment Server'),
+    '#open' => TRUE,
+    '#description' => t('Blah Blah Blah go to ITS to get your key and sign agreement.'),
+  ];
+  $form['third_party_settings']['unl_webform_secure_payment']['api_key'] = [
+    '#type' => 'textfield',
+    '#title' => t('Your API key'),
+    '#default_value' => $third_party_settings_manager->getThirdPartySetting('unl_webform_secure_payment', 'api_key');,
+    '#return_value' => TRUE,
+  ];
+}

@@ -1,0 +1,11 @@
+name: 'UNL Webform Secure Payment'
+description: 'NU ITS Secure Payment Server'
+package: UNL
+
+type: module
+core_version_requirement: ^8 || ^9
+
+version: 1.x
+
+dependencies:
+  - drupal:webform
