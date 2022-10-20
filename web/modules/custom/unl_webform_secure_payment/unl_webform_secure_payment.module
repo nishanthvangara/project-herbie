@@ -15,7 +15,7 @@ function unl_webform_secure_payment_webform_third_party_settings_form_alter(&$fo
   $form['third_party_settings']['unl_webform_secure_payment']['api_key'] = [
     '#type' => 'textfield',
     '#title' => t('Your API key'),
-    '#default_value' => $third_party_settings_manager->getThirdPartySetting('unl_webform_secure_payment', 'api_key');,
+    '#default_value' => $third_party_settings_manager->getThirdPartySetting('unl_webform_secure_payment', 'api_key'),
     '#return_value' => TRUE,
   ];
 }
