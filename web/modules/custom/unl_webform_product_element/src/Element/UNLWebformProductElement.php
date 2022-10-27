@@ -1,11 +1,26 @@
 <?php
 
-namespace Drupal\unl_webform_secure_payment\src\Element;
+namespace Drupal\unl_webform_product_element\src\Element;
 
 use Drupal\Core\Render\Element;
 use Drupal\Core\Render\Element\FormElement;
 use Drupal\Core\Form\FormStateInterface;
 
+/**
+ * Provides a 'webform_product_element' element.
+ *
+ * @WebformElement(
+ *   id = "webform_product_element",
+ *   label = @Translation("Webform product element"),
+ *   description = @Translation("Provides a webform element product."),
+ *   category = @Translation("Example elements"),
+ * )
+ *
+ * @see \Drupal\unl_webform_product_element\Element\WebformProductElement
+ * @see \Drupal\webform\Plugin\WebformElementBase
+ * @see \Drupal\webform\Plugin\WebformElementInterface
+ * @see \Drupal\webform\Annotation\WebformElement
+ */
 class WebformProductElement extends FormElement {
 
     /**
@@ -17,14 +32,14 @@ class WebformProductElement extends FormElement {
         '#input' => TRUE,
         '#size' => 60,
         '#process' => [
-          [$class, 'processWebformElementProduct'],
+          [$class, 'processWebformProductElement'],
           [$class, 'processAjaxForm'],
         ],
         '#element_validate' => [
-          [$class, 'validateWebformExampleElement'],
+          [$class, 'validateWebformProductElement'],
         ],
         '#pre_render' => [
-          [$class, 'preRenderWebformExampleElement'],
+          [$class, 'preRenderWebformProductElement'],
         ],
         '#theme' => 'input__webform_example_element',
         '#theme_wrappers' => ['form_element'],
@@ -34,15 +49,15 @@ class WebformProductElement extends FormElement {
     /**
      * Processes a 'webform_example_element' element.
      */
-    public static function processWebformElementProduct(&$element, FormStateInterface $form_state, &$complete_form) {
+    public static function processWebformProductElement(&$element, FormStateInterface $form_state, &$complete_form) {
       // Here you can add and manipulate your element's properties and callbacks.
       return $element;
     }
   
     /**
      * Webform element validation handler for #type 'webform_example_element'.
-     */
-    public static function validateWebformExampleElement(&$element, FormStateInterface $form_state, &$complete_form) {
+     */ 
+    public static function validateWebformProductElement(&$element, FormStateInterface $form_state, &$complete_form) {
       // Here you can add custom validation logic.
     }
   
@@ -57,7 +72,7 @@ class WebformProductElement extends FormElement {
      * @return array
      *   The $element with prepared variables ready for theme_element().
      */
-    public static function preRenderWebformExampleElement(array $element) {
+    public static function preRenderWebformProductElement(array $element) {
       $element['#attributes']['type'] = 'text';
       Element::setAttributes($element, ['id', 'name', 'value', 'size', 'maxlength', 'placeholder']);
       static::setAttributes($element, ['form-text', 'webform-product-element']);

@@ -1,5 +1,5 @@
 (function ($, Drupal) {
-    Drupal.behaviors.webform_promotion_code = {
+    Drupal.behaviors.webform_product_element = {
       attach: function (context, settings) {
         
         function generateRandomCode(length) {
@@ -35,7 +35,7 @@
           $('textarea[name="properties[codes]"]').val(newValue.join("\n"));
         }
         
-        $('span.wpc-auto-generate', context).once('webform_promotion_code').click(function(){
+        $('span.wpc-auto-generate', context).once('webform_product_element').click(function(){
           var amount = $('input[name="properties[amount]"]').val();
           generateRandomCodes(amount);
         });

@@ -1,12 +1,27 @@
 <?php
 
-namespace Drupal\unl_webform_secure_payment\src\Plugin\WebformElement;
+namespace Drupal\unl_webform_product_element\src\Plugin\WebformElement;
 
 
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\webform\Plugin\WebformElementBase;
 
 
+/**
+ * Provides a 'webform_product_element' element.
+ *
+ * @WebformElement(
+ *   id = "webform_product_element",
+ *   label = @Translation("Webform product element"),
+ *   description = @Translation("Provides a webform element product."),
+ *   category = @Translation("Example elements"),
+ * )
+ *
+ * @see \Drupal\unl_webform_product_element\Element\WebformProductElement
+ * @see \Drupal\webform\Plugin\WebformElementBase
+ * @see \Drupal\webform\Plugin\WebformElementInterface
+ * @see \Drupal\webform\Annotation\WebformElement
+ */
 class WebformProductElement extends WebformElementBase
 {
 
