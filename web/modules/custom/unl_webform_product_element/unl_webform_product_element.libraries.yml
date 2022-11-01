@@ -1,0 +1,10 @@
+webform.admin.product_element_style:
+  version: VERSION
+  css:
+    theme:
+      css/unl_webform_product_element.css: {}
+webform.admin.promotion_code_js:
+  js:
+    js/unl_webform_product_element.js: {}
+  dependencies:
+    - core/drupal
