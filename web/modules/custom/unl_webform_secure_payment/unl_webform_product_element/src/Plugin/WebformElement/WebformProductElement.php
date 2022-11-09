@@ -15,42 +15,53 @@ use Drupal\webform\Plugin\WebformElementBase;
  *   category = @Translation("Advanced elements"),
  * )
  */
-class WebformProductElement extends WebformElementBase
-{
+class WebformProductElement extends WebformElementBase {
 
   /**
    * {@inheritdoc}
    */
-  public function getDefaultProperties()
-  {
+  public function getDefaultProperties() {
     return parent::getDefaultProperties() + [
-      'code_length' => 0,
-      'code_pattern' => '',
-    ];
+        'product_price' => 0,
+        'product_name' => '',
+        'colour_select' => 'red',
+      ];
   }
 
   /**
    * {@inheritdoc}
    */
-  public function form(array $form, FormStateInterface $form_state)
-  {
+  public function form(array $form, FormStateInterface $form_state) {
     $form = parent::form($form, $form_state);
 
-    $form['promotion_code'] = [
+    $form['product_element'] = [
       '#type' => 'fieldset',
       '#title' => $this->t('Product settings'),
     ];
-    $form['promotion_code']['code_pattern'] = [
+    $form['product_element']['product_name'] = [
       '#type' => 'textfield',
       '#title' => $this->t('Name of the product'),
       '#required' => TRUE,
       '#description' => $this->t('Enter the name of the product'),
     ];
-    $form['promotion_code']['code_length'] = [
+    $form['product_element']['product_price'] = [
       '#type' => 'number',
       '#title' => $this->t('Price of product'),
       '#required' => TRUE,
       '#description' => $this->t('Insert price of the product'),
+    ];
+    $form['product_element']['colour_select'] = [
+      '#type' => 'radios',
+      '#title' => $this->t('Pick a colour'),
+      '#options' => [
+        'blue' => $this->t('Blue'),
+        'white' => $this->t('White'),
+        'black' => $this->t('Black'),
+        'other' => $this->t('Other'),
+      ],
+      '#attributes' => [
+        'name' => 'field_colour_select',
+      ],
     ];
 
     $form['#attached']['library'][] = 'unl_webform_product_element/webform.admin.product_element_style';
@@ -58,4 +69,5 @@ class WebformProductElement extends WebformElementBase
 
     return $form;
   }
+
 }
