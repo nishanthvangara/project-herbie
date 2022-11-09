@@ -2,9 +2,23 @@
 
 use Drupal\Core\Form\FormStateInterface;
 
-function unl_webform_secure_payment_webform_third_party_settings_form_alter(&$form, FormStateInterface $form_state) {
-  
+function unl_webform_secure_payment_webform_third_party_settings_form_alter(&$form, FormStateInterface $form_state)
+{
+
   $third_party_settings_manager = \Drupal::service('webform.third_party_settings_manager');
+
+  // $honeypot = (int) $third_party_settings_manager->getThirdPartySetting('honeypot', 'honeypot');
+
+  $api_key = $third_party_settings_manager->getThirdPartySetting('unl_webform_secure_payment', 'api_key');
+  $cost_object = $third_party_settings_manager->getThirdPartySetting('unl_webform_secure_payment', 'cost_object');
+
+
+var_dump(
+    $third_party_settings_manager->getThirdPartySettings('honeypot'));
+  var_dump(
+    $third_party_settings_manager->getThirdPartySetting('honeypot', 'honeypot')
+  );
+
 
   $form['third_party_settings']['unl_webform_secure_payment'] = [
     '#type' => 'details',
@@ -15,7 +29,13 @@ function unl_webform_secure_payment_webform_third_party_settings_form_alter(&$fo
   $form['third_party_settings']['unl_webform_secure_payment']['api_key'] = [
     '#type' => 'textfield',
     '#title' => t('Your API key'),
-    '#default_value' => $third_party_settings_manager->getThirdPartySetting('unl_webform_secure_payment', 'api_key'),
+    '#default_value' =>   $api_key,
+    '#return_value' => TRUE,
+  ];
+  $form['third_party_settings']['unl_webform_secure_payment']['cost_object'] = [
+    '#type' => 'textfield',
+    '#title' => t('Cost Object Id'),
+    '#default_value' => $cost_object,
     '#return_value' => TRUE,
   ];
 }

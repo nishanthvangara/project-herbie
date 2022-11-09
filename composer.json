@@ -98,6 +98,10 @@
                     "url": "https://github.com/NigelOToole/progress-tracker/archive/refs/tags/2.0.6.zip"
                 }
             }
+        },
+        {
+            "type": "git",
+            "url": "git@git.unl.edu:unl-its/secure-payment-server-php.git"
         }
     ],
     "require": {
@@ -160,13 +164,14 @@
         "drupal/twig_tweak": "^2.0",
         "drupal/twig_ui": "^1.0",
         "drupal/webform": "^6.1",
-        "drush/drush": "^11",
+        "drush/drush": "^11.3",
         "jackocnr/intl-tel-input": "16.1.0",
         "nigelotoole/progress-tracker": "^2.0",
         "npm-asset/select2": "^4.0",
         "oomphinc/composer-installers-extender": "^2.0",
         "ractoon/jquery-text-counter": "0.9.0",
         "robinherbots/jquery.inputmask": "5.0.5",
+        "unl-its/php-payment-server": "*",
         "unl/wdntemplates": "^5.3",
         "unlcms/external_entities_unldirectory": "^2.0",
         "unlcms/project-herbie-composer-plugin": "^1.0",
@@ -208,7 +213,9 @@
         "classmap": [
             "scripts/composer/UnlScriptHandler.php"
         ],
-        "files": ["load.environment.php"]
+        "files": [
+            "load.environment.php"
+        ]
     },
     "scripts": {
         "post-drupal-scaffold-cmd": [
@@ -223,32 +230,61 @@
         "patchLevel": {
             "drupal/core": "-p2"
         },
-        "installer-types": ["bower-asset", "npm-asset"],
+        "installer-types": [
+            "bower-asset",
+            "npm-asset"
+        ],
         "installer-paths": {
-            "web/core": ["type:drupal-core"],
+            "web/core": [
+                "type:drupal-core"
+            ],
             "web/libraries/{$name}": [
                 "type:drupal-library",
                 "type:bower-asset",
                 "type:npm-asset"
             ],
-            "web/modules/contrib/{$name}": ["type:drupal-module"],
-            "web/profiles/contrib/{$name}": ["type:drupal-profile"],
-            "web/themes/contrib/{$name}": ["type:drupal-theme"],
-            "drush/Commands/{$name}": ["type:drupal-drush"],
-            "web/modules/custom/{$name}": ["type:drupal-custom-module"],
-            "web/themes/custom/{$name}": ["type:drupal-custom-theme"],
-            "web/libraries/tippyjs/5.x": ["atomiks/tippyjs"],
-            "web/libraries/tabby": ["cferdinandi/tabby"],
-            "web/libraries/jquery.inputmask": ["robinherbots/jquery.inputmask"],
-            "web/libraries/jquery.intl-tel-input": ["jackocnr/intl-tel-input"],
-            "web/libraries/jquery.textcounter": ["ractoon/jquery-text-counter"],
-            "web/libraries/progress-tracker": ["nigelotoole/progress-tracker"]
+            "web/modules/contrib/{$name}": [
+                "type:drupal-module"
+            ],
+            "web/profiles/contrib/{$name}": [
+                "type:drupal-profile"
+            ],
+            "web/themes/contrib/{$name}": [
+                "type:drupal-theme"
+            ],
+            "drush/Commands/{$name}": [
+                "type:drupal-drush"
+            ],
+            "web/modules/custom/{$name}": [
+                "type:drupal-custom-module"
+            ],
+            "web/themes/custom/{$name}": [
+                "type:drupal-custom-theme"
+            ],
+            "web/libraries/tippyjs/5.x": [
+                "atomiks/tippyjs"
+            ],
+            "web/libraries/tabby": [
+                "cferdinandi/tabby"
+            ],
+            "web/libraries/jquery.inputmask": [
+                "robinherbots/jquery.inputmask"
+            ],
+            "web/libraries/jquery.intl-tel-input": [
+                "jackocnr/intl-tel-input"
+            ],
+            "web/libraries/jquery.textcounter": [
+                "ractoon/jquery-text-counter"
+            ],
+            "web/libraries/progress-tracker": [
+                "nigelotoole/progress-tracker"
+            ]
         },
         "patches": {
             "drupal/core": {
                 "2827910 - Add Option to Display Top Level page in BookNavigationBlock": "patches/allow-top-item-to-show-2827910-26-D8.patch",
                 "3056149 - Include 'is_active' value in book tree items": "patches/drupal-book_tree_active_item-3056149-9.patch",
-                "3060292 - Drupal\\media\\Entity\\Media::prepareSave should convert URL object metadata to string before saving" : "patches/drupal_media-resource_convert_url_object_to_string-3060292-30-D9.patch",
+                "3060292 - Drupal\\media\\Entity\\Media::prepareSave should convert URL object metadata to string before saving": "patches/drupal_media-resource_convert_url_object_to_string-3060292-30-D9.patch",
                 "502430 - Allow the book outline functionality on non-book-enabled node types to be hidden": "patches/502430-90.patch",
                 "Custom - Allow '@' in CSS selectors for Views displays": "patches/custom-views-DisplayPluginBase-valid-css-selector.patch",
                 "3080606 - Re-order Layout Builder sections": "patches/3080606-71.patch",
@@ -271,7 +307,7 @@
         "drupal-scaffold": {
             "file-mapping": {
                 "[web-root]/sites/default/default.settings.php": {
-                  "append": "patches/default.settings.php.append.php"
+                    "append": "patches/default.settings.php.append.php"
                 }
             },
             "locations": {

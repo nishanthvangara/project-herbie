@@ -14,12 +14,14 @@ use Drupal\Core\Form\FormStateInterface;
  *
  * @FormElement("webform_product_element")
  */
-class WebformProductElement extends FormElement {
+class WebformProductElement extends FormElement
+{
 
   /**
    * {@inheritdoc}
    */
-  public function getInfo() {
+  public function getInfo()
+  {
     $class = get_class($this);
     return [
       '#input' => TRUE,
@@ -42,41 +44,26 @@ class WebformProductElement extends FormElement {
   /**
    * Processes a 'webform_product_element' element.
    */
-  public static function processWebformProductElement(&$element, FormStateInterface $form_state, &$complete_form) {
+  public static function processWebformProductElement(&$element, FormStateInterface $form_state, &$complete_form)
+  {
     // Here you can add and manipulate your element's properties and callbacks.
+
+    $messenger = \Drupal::service('messenger');
+    $messenger->addMessage('processWebformProductElement');
     return $element;
   }
 
   /**
    * Webform element validation handler for #type 'webform_product_element'.
    */
-  public static function validateWebformProductElement(&$element, FormStateInterface $form_state, &$complete_form) {
-    $has_access = (!isset($element['#access']) || $element['#access'] === TRUE);
+  public static function validateWebformProductElement(&$element, FormStateInterface $form_state, &$complete_form)
+  {
+    $messenger = \Drupal::service('messenger');
+    $messenger->addMessage('validateWebformProductElement');
 
-    $value = $element['#value'];
-    if ($value === '') {
-      return;
-    }
+    // validation for each product
 
-    $promotion_code = trim($value);
-    if ($promotion_code === FALSE) {
-      if ($has_access) {
-        if (isset($element['#title'])) {
-          $form_state->setError($element, t('%name must be a valid code.', ['%name' => $element['#title']]));
-        }
-        else {
-          $form_state->setError($element);
-        }
-      }
-      return;
-    }
 
-    $valid_codes = trim($element['#codes']);
-    $valid_codes_array = array_map('trim', explode(PHP_EOL, $valid_codes));
-
-    if ($has_access && in_array($promotion_code, $valid_codes_array) === FALSE) {
-      $form_state->setError($element, t('%name must be a valid code.', ['%name' => $element['#title']]));
-    }
   }
 
   /**
@@ -90,14 +77,16 @@ class WebformProductElement extends FormElement {
    * @return array
    *   The $element with prepared variables ready for theme_element().
    */
-  public static function preRenderWebformProductElement(array $element) {
+  public static function preRenderWebformProductElement(array $element)
+  {
     $element['#attributes']['type'] = 'text';
     Element::setAttributes(
-        $element,
-        ['id', 'name', 'value', 'size', 'maxlength', 'placeholder']
+      $element,
+      ['id', 'name', 'value', 'size', 'maxlength', 'placeholder']
     );
     static::setAttributes($element, ['form-text', 'webform_product_element']);
+    $messenger = \Drupal::service('messenger');
+    $messenger->addMessage('preRenderWebformProductElement');
     return $element;
   }
-
 }
