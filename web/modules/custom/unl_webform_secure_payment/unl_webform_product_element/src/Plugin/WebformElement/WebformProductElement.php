@@ -23,8 +23,7 @@ class WebformProductElement extends WebformElementBase {
   public function getDefaultProperties() {
     return parent::getDefaultProperties() + [
         'product_price' => 0,
-        'product_name' => '',
-        'colour_select' => 'red',
+        'product_name' => ''
       ];
   }
 
@@ -50,19 +49,7 @@ class WebformProductElement extends WebformElementBase {
       '#required' => TRUE,
       '#description' => $this->t('Insert price of the product'),
     ];
-    $form['product_element']['colour_select'] = [
-      '#type' => 'radios',
-      '#title' => $this->t('Pick a colour'),
-      '#options' => [
-        'blue' => $this->t('Blue'),
-        'white' => $this->t('White'),
-        'black' => $this->t('Black'),
-        'other' => $this->t('Other'),
-      ],
-      '#attributes' => [
-        'name' => 'field_colour_select',
-      ],
-    ];
+
 
     $form['#attached']['library'][] = 'unl_webform_product_element/webform.admin.product_element_style';
     $form['#attached']['library'][] = 'unl_webform_product_element/webform.admin.promotion_code_js';

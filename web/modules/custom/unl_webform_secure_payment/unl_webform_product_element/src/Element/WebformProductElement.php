@@ -5,7 +5,7 @@ namespace Drupal\unl_webform_product_element\Element;
 use Drupal\Core\Render\Element;
 use Drupal\Core\Render\Element\FormElement;
 use Drupal\Core\Form\FormStateInterface;
-
+use Drupal\node\Entity\Node;
 /**
  * Provides a 'webform_product_element'.
  *
@@ -25,7 +25,7 @@ class WebformProductElement extends FormElement
     $class = get_class($this);
     return [
       '#input' => TRUE,
-      '#size' => 60,
+      '#size' => 30,
       '#process' => [
         [$class, 'processWebformProductElement'],
         [$class, 'processAjaxForm'],
@@ -48,8 +48,8 @@ class WebformProductElement extends FormElement
   {
     // Here you can add and manipulate your element's properties and callbacks.
 
-    $messenger = \Drupal::service('messenger');
-    $messenger->addMessage('processWebformProductElement');
+//    $messenger = \Drupal::service('messenger');
+//    $messenger->addMessage('processWebformProductElement');
     return $element;
   }
 
@@ -58,8 +58,8 @@ class WebformProductElement extends FormElement
    */
   public static function validateWebformProductElement(&$element, FormStateInterface $form_state, &$complete_form)
   {
-    $messenger = \Drupal::service('messenger');
-    $messenger->addMessage('validateWebformProductElement');
+//    $messenger = \Drupal::service('messenger');
+//    $messenger->addMessage('validateWebformProductElement');
 
     // validation for each product
 
@@ -67,7 +67,7 @@ class WebformProductElement extends FormElement
   }
 
   /**
-   * Prepares a #type 'email_multiple' render element for theme_element().
+   * Prepares a #type 'product' render element for theme_element().
    *
    * @param array $element
    *   An associative array containing the properties of the element.
@@ -79,14 +79,13 @@ class WebformProductElement extends FormElement
    */
   public static function preRenderWebformProductElement(array $element)
   {
-    $element['#attributes']['type'] = 'text';
-    Element::setAttributes(
-      $element,
-      ['id', 'name', 'value', 'size', 'maxlength', 'placeholder']
-    );
-    static::setAttributes($element, ['form-text', 'webform_product_element']);
-    $messenger = \Drupal::service('messenger');
-    $messenger->addMessage('preRenderWebformProductElement');
+    $element['#attributes']['readonly'] = 'readonly';
+    $element['#attributes']['type'] = 'label';
+    $element['#attributes']['value'] = $element["#product_name"]. ' : '. $element["#product_price"]. ' USD ';
+
+    Element::setAttributes($element, ['id', 'name', 'value', 'size', 'maxlength', 'placeholder']);
+    static::setAttributes($element, ['form-text', 'webform-product-element']);
     return $element;
+
   }
 }
