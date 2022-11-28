@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\unl_webform_product_element\Element;
+namespace Drupal\unl_webform_secure_payment\Element;
 
 use Drupal\Core\Render\Element;
 use Drupal\Core\Render\Element\FormElement;

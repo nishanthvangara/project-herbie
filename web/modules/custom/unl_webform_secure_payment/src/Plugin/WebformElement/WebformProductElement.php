@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\unl_webform_product_element\Plugin\WebformElement;
+namespace Drupal\unl_webform_secure_payment\Plugin\WebformElement;
 
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\webform\Plugin\WebformElementBase;
